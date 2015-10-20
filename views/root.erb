@@ -1,57 +1,80 @@
-<title>VLC controller</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-<table border="1" width="100%" height="100%" cellpadding="0" cellspacing="0">
-  <tr>
-    <td colspan="2" align="center">
-      <% if @@vlc.playing? %>
-          <a href="pause">
-            <img src="/images/pause.jpg" width="25%">
-          </a>
-      <% else %>
-          <a href="play">
-            <img src="/images/play.jpg" width="25%">
-          </a>
-      <% end %>
-    </td>
-  </tr>
+<html>
+    <head>
+        <title>VLC controller</title>
+        <link rel="stylesheet" type="text/css" href="/style/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    </head>
 
-  <tr>
-    <td align="center">
-      <a name="prev"></a>
-      <a href="#prev">
-        <img src="/images/prev.jpg" width="25%">
-      </a>
-    </td>
-    <td align="center">
-      <a name="next"></a>
-      <a href="#next">
-        <img src="/images/next.jpg" width="25%">
-      </a>
-    </td>
-  </tr>
+    <body>
 
-  <tr>
-    <td align="center">
-      <a href="volup">
-        <img src="/images/volup.jpg" width="25%">
-      </a>
-    </td>
-    <td align="center">
-      <a href="voldown">
-        <img src="/images/voldown.jpg" width="25%">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <a href="fullscreen">
-        <img src="/images/fullscreen.jpg" width="25%">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <%= Time.at(@@vlc.time).utc.strftime("%H:%M:%S") %>
-    </td>
-  </tr>
-</table>
+        <table border="1" width="100%" height="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td colspan="3">
+                    <%= @@vlc.title %>
+                </td>
+            </tr>
+            <tr height="20%">
+                <td colspan="3" align="center">
+                      <a href="play">
+                        <img src='/images/play.png' width="15%">
+                      </a>
+
+                </td>
+            </tr>
+
+            <tr height="20%">
+                <td align="center" width="30%" height="20%">
+                    <a href="prev">
+                        <img src="/images/prev.png" width="50%">
+                    </a>
+                </td>
+                <td width="30%">
+
+                </td>
+                <td align="center" width="30%" height="20%">
+                    <a href="next">
+                        <img src="/images/next.png" width="50%">
+                    </a>
+                </td>
+            </tr>
+
+            <tr height="20%">
+                <td align="center" width="30%" height="20%">
+                    <a href="volup">
+                        <img src="/images/volup.png" width="50%">
+                    </a>
+                </td>
+                <td width="30%" align="center">
+                    <a href="mute">
+                        <img src="/images/mute.png" width="50%">
+                    </a>
+                </td>
+                <td align="center" width="30%" height="20%">
+                    <a href="voldown">
+                        <img src="/images/voldown.png" width="50%">
+                    </a>
+                </td>
+            </tr>
+            <tr height="20%">
+                <td colspan="3" align="center" height="20%">
+                    <a href="fullscreen">
+                        <img src="/images/fullscreen.png" width="15%">
+                    </a>
+                </td>
+            </tr>
+            <tr height="20%">
+                <td align="center" width="30%" height="20%">
+                    <a href="showtime">
+                        <img src="/images/time.png" width="30%">
+                    </a>  
+                </td>
+                <td width="30%">
+
+                </td>
+                <td align="center" width="30%" height="20%">
+                    <%= Time.at(@@vlc.time).utc.strftime("%H:%M:%S") %>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

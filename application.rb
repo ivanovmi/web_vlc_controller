@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'vlc-client'
+
 #========================================= SETTINGS SECTION ============================================================
 # Start application on custom port
 if /[\D]+/.match(ARGV[0])
@@ -16,6 +17,9 @@ set :bind => '0.0.0.0'
 set :views => "#{File.dirname(__FILE__)}/views"
 
 configure do
+  # pid = Process.spawn('vlc --extraintf rc --rc-host 127.0.0.1:9999')
+  # Process.detach(pid)
+
   @@vlc = VLC::Client.new('127.0.0.1', 9999)
 end
 
@@ -27,13 +31,11 @@ end
 
 get '/play' do
     @@vlc.connect
-    @@vlc.play
-    redirect '/'
-end
-
-get '/pause' do
-    @@vlc.connect
-    @@vlc.pause
+    if @@vlc.playing?
+      @@vlc.pause
+    elsif not @@vlc.playing?
+      @@vlc.play
+    end
     redirect '/'
 end
 
@@ -47,20 +49,33 @@ end
 
 get '/volup' do
   @@vlc.connect
-  volume = @@vlc.volume
-  @@vlc.volume = volume + 10
+  @@vlc.volume = @@vlc.volume + 10
   redirect '/'
 end
 
 get '/voldown' do
   @@vlc.connect
-  volume = @@vlc.volume
-  @@vlc.volume = volume - 10
+  @@vlc.volume = @@vlc.volume - 10
+  redirect '/'
+end
+
+get '/mute' do
+  @@vlc.connect
+  if @@vlc.volume == 0
+    @@vlc.volume = @@volume
+  else
+    @@volume = @@vlc.volume
+    @@vlc.volume = 0
+  end
   redirect '/'
 end
 
 get '/fullscreen' do
   @@vlc.connect
   @@vlc.fullscreen
+  redirect '/'
+end
+
+get '/showtime' do
   redirect '/'
 end
