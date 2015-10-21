@@ -1,0 +1,36 @@
+body {
+    position:absolute;
+    margin:0;
+    padding:0;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+/*tr, td {
+    line-height: 15%;
+}*/
+
+.leftcolumn {
+    width: 33%;
+    float: inherit;
+}
+
+.centercolumn {
+    width: 33%;
+    float: none;
+}
+
+.rightcolumn {
+    width: 33%;
+    float: inherit;
+}
+
+img{
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 5px;
+    align-self: center;
+}
